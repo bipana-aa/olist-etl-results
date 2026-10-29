@@ -252,8 +252,4 @@ python -m pytest                    run the tests
 jupyter notebook                    open the notebook
 ```
 
-## Author
 
-Bipana Khadka, King's College Nepal (Westcliff University BSCS)
-
-Data: Olist and Kaggle, used for learning purposes.
