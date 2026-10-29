@@ -1,0 +1,95 @@
+Table customers {
+  customer_id text [pk]
+  customer_unique_id text
+  zip_code_prefix integer
+  city text
+  state text
+}
+
+Table sellers {
+  seller_id text [pk]
+  zip_code_prefix integer
+  city text
+  state text
+}
+
+Table geolocation {
+  zip_code_prefix integer [pk]
+  latitude real
+  longitude real
+  city text
+  state text
+}
+
+Table product_categories {
+  category_name text [pk]
+  category_name_en text
+}
+
+Table products {
+  product_id text [pk]
+  category_name text
+  name_length integer
+  description_length integer
+  photos_qty integer
+  weight_g real
+  length_cm real
+  height_cm real
+  width_cm real
+}
+
+Table orders {
+  order_id text [pk]
+  customer_id text
+  order_status text
+  purchase_ts text
+  approved_ts text
+  delivered_carrier_ts text
+  delivered_customer_ts text
+  estimated_delivery_date text
+  purchase_year integer
+  purchase_month integer
+  delivery_days real
+  delay_days real
+  is_late integer
+}
+
+Table order_items {
+  order_id text
+  order_item_id integer
+  product_id text
+  seller_id text
+  shipping_limit_ts text
+  price real
+  freight_value real
+  total_price real
+  indexes { (order_id, order_item_id) [pk] }
+}
+
+Table order_payments {
+  order_id text
+  payment_sequential integer
+  payment_type text
+  payment_installments integer
+  payment_value real
+  indexes { (order_id, payment_sequential) [pk] }
+}
+
+Table order_reviews {
+  review_id text
+  order_id text
+  review_score integer
+  comment_title text
+  comment_message text
+  creation_date text
+  answer_ts text
+  indexes { (review_id, order_id) [pk] }
+}
+
+Ref: orders.customer_id > customers.customer_id
+Ref: order_items.order_id > orders.order_id
+Ref: order_items.product_id > products.product_id
+Ref: order_items.seller_id > sellers.seller_id
+Ref: order_payments.order_id > orders.order_id
+Ref: order_reviews.order_id > orders.order_id
+Ref: products.category_name > product_categories.category_name
