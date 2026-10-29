@@ -1,0 +1,2 @@
+# Do not count the notebook in GitHub language statistics (the code is Python)
+*.ipynb linguist-documentation
